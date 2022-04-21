@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mwchben/blockchain-js/issues"
   },
-  "homepage": "https://github.com/mwchben/blockchain-js#readme"
+  "homepage": "https://github.com/mwchben/blockchain-js#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
