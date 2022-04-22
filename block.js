@@ -13,12 +13,11 @@ class Block{
     }
 
     toString(){
-        return `
-        Block fields
-        Timestamp: ${this.timestamp}
-        lastHash: ${this.lastHash.substring(0,12)}
-        hash: ${this.hash.substring(0,12)}
-        data: ${this.data}
+        return `Block fields:
+        Timestamp-> ${this.timestamp}
+        lastHash-> ${this.lastHash.substring(0,12)}
+        hash-> ${this.hash.substring(0,12)}
+        data-> ${this.data}
         `;
     }
 }
