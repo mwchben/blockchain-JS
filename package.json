@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "description": "A network with js that seeks to implement core concepts of blockchain; bits of tutorial from David Katz",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-test": "nodemon dev-test"
   },
   "repository": {
     "type": "git",
