@@ -22,6 +22,7 @@ class Block{
     }
 
     //static - able to call the f(x) without having to make new instance of the Block class  as long as we have the class imported
+    //or not necessary need a Block instance to use it as a f(x)
     //new - create new instance of the Block class 
     //this - the f(x) itself
     static genesis(){
