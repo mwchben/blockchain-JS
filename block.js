@@ -20,6 +20,13 @@ class Block{
         data-> ${this.data}
         `;
     }
+
+    //static - able to call the f(x) without having to make new instance of the Block class  as long as we have the class imported
+    //new - create new instance of the Block class 
+    //this - the f(x) itself
+    static genesis(){
+        return new this('begins','____','first67hash23',[]);
+    }
 }
 
 export default Block;
