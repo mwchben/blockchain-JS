@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/mwchben/blockchain-js#readme",
   "devDependencies": {
+    "jest": "^28.0.1",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
