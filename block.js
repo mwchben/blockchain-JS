@@ -1,3 +1,6 @@
+
+import sha256 from 'crypto-js/sha256.js';
+
 //constructor -> function that helps us define unique attributes for any  instance of a class
 //and assign them to args passed
 
@@ -30,13 +33,19 @@ class Block{
     }
 
     //this f(x) will require 2 params i.e lastBlock to get its hash and the new data to be read
+    //the generation of the hashes based on the lastBlock links the blocks 2gther hence the blockchain
+    //sha256(`${timestamp} ${lastHash} ${data}`)
     static mineBlock(lastBlock, data){
         const timestamp = Date.now();
         const lastHash = lastBlock.hash;
-        const hash = 'to do';
-
+        const hash = sha256(`${timestamp} ${lastHash} ${data}`).toString();
+        //or = Block.hash(timestamp,lastHash,data);
+        
         return new this(timestamp,lastHash,hash,data);
     }
+    // static hash (timestamp,lastHash,data){
+    //     return sha256(`${timestamp} ${lastHash} ${data}`).toString();
+    // }
 }
 
 export default Block;
