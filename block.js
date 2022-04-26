@@ -28,6 +28,15 @@ class Block{
     static genesis(){
         return new this('begins','____','first67hash23',[]);
     }
+
+    //this f(x) will require 2 params i.e lastBlock to get its hash and the new data to be read
+    static mineBlock(lastBlock, data){
+        const timestamp = Date.now();
+        const lastHash = lastBlock.hash;
+        const hash = 'to do';
+
+        return new this(timestamp,lastHash,hash,data);
+    }
 }
 
 export default Block;
