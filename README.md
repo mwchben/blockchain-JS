@@ -9,6 +9,6 @@ The application is build with javascript with some es6 syntax  modifications and
 ### Tutor
 
 David Katz
-Web [@David] (https://davidtkatz.com/).
+[@David's Website](https://davidtkatz.com/).
 
 
