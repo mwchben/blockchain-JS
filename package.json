@@ -8,6 +8,11 @@
     "test": "jest --watchAll",
     "dev-test": "nodemon dev-test"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mwchben/blockchain-js.git"
@@ -23,6 +28,9 @@
   },
   "homepage": "https://github.com/mwchben/blockchain-js#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^28.0.2",
     "jest": "^28.0.1",
     "nodemon": "^2.0.15"
   },
