@@ -4,11 +4,11 @@ This project is a network for my 4th year SCIT project theat will be accessible 
 
 ### Note 
 
-The application is build with javascript with some es6 syntax  modifications and typescript in mind.
+The application is build with javascript with some es6 syntax  modifications and typescript in mind. Tests are run with jest and babel scripts
 
 ### Tutor
 
 David Katz
-Web [David](https://davidtkatz.com/).
+Web [@David] (https://davidtkatz.com/).
 
 
