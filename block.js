@@ -43,9 +43,19 @@ class Block{
         
         return new this(timestamp,lastHash,hash,data);
     }
-    // static hash (timestamp,lastHash,data){
-    //     return sha256(`${timestamp} ${lastHash} ${data}`).toString();
-    // }
+
+    //...........................................................................
+    //for use in the blockHash f(x)
+    static hash (timestamp,lastHash,data){
+        return sha256(`${timestamp} ${lastHash} ${data}`).toString();
+    }
+    //f(x) that requires only the block input to generate hash of a block
+    static blockHash (block) {
+        const { timestamp, lastBlock, data } = block; //es6 destructuring (makes it easy to extract only what is needed.)
+
+        return Block.hash(timestamp,lastBlock,data)
+    }
+    //...........................................................................
 }
 
 export default Block;
