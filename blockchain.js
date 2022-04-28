@@ -12,7 +12,7 @@ export default class Blockchain {
         return newBlock;
     }    
 
-    isChainValid (){
+    isChainValid (chain){
 
         //test 1
         if( JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis) ){
