@@ -34,4 +34,18 @@ export default class Blockchain {
         //if all tests are passed
         return true;
     }
+
+    replaceChain(newChain){
+        if(newChain.length <= this.chain.length){
+            console.log("Received chain not longer/equal to current chain");
+            return;
+        }
+        else if(!this.isChainValid(newChain)){
+            console.log("Received chain not valid");
+            return;
+        }
+
+        console.log("Replacing blockchain with new Chain");
+        this.chain = newChain;
+    }
 }
