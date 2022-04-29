@@ -12,16 +12,16 @@ export default class Blockchain {
         return newBlock;
     }    
 
-    isChainValid (chain){
+    isChainValid(chain){
 
         //test 1
-        if( JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis) ){
+        if( JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()) ){
             return false;
         }
 
 
         //test 2
-        for (let i=1;i<this.chain.length;i++){
+        for (let i=1;i<chain.length;i++){
             //declare the block and lastblock hashes in r/tion to 'i'th item for postn
             const block = chain[i];
             const lastBlock = chain[i-1];
@@ -37,7 +37,7 @@ export default class Blockchain {
 
     replaceChain(newChain){
         if(newChain.length <= this.chain.length){
-            console.log("Received chain not longer/equal to current chain");
+            console.log("Received chain is not > than current chain");
             return;
         }
         else if(!this.isChainValid(newChain)){
