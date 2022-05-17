@@ -22,6 +22,7 @@ export default class P2PServer {
     connectToPeers(){
         peers.forEach(peer => {
             const socket = new WebSocket(peer) //a new socket object like in "connection" event
+            
             socket.on("open", () => {
                 this.connectSocket(socket) //when server starts, connect this socket as a peer
             })
@@ -33,8 +34,9 @@ export default class P2PServer {
         const server = new WebSocketServer({ port: P2P_PORT });
 
         server.on('connection', (socket) => {
-            this.connectSocket(socket)  
+            this.connectSocket(socket) //accept other sockets to connect to this server 
         });
+
         this.connectToPeers();
         console.log(`Listening for P2P connections on: ${P2P_PORT}`);
     }
