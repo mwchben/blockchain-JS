@@ -1,7 +1,7 @@
 import Block from "./block.js";
 import Blockchain from "./blockchain.js";
 
-describe('Blockchain', ()=>{
+describe('The Blockchain', ()=>{
 
     let bc, bc2;
 
@@ -33,7 +33,7 @@ describe('Blockchain', ()=>{
         bc2.addBlock('foo'); 
         //as data like in 'somedata' also T or F assertions in Jest we use toBe method
         
-        expect(bc.isChainValid(bc2)).toBe(true);
+        expect(bc.isChainValid(bc2.chain)).toBe(true);
     })
 
     it( "invalidates a chain with a corrupt genesis block", ()=> {
