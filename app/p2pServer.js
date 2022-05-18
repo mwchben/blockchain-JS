@@ -11,13 +11,19 @@ export default class P2PServer {
         this.sockets = [];
     }
 
-    //function to interact with socket
+    //function to interact with socket, all sockets run via here
     connectSocket(socket){
+
+        //this means its own
         this.sockets.push(socket);
 
         console.log("Socket connected");
+
+        this.messageHandler(socket); //receive
+        socket.send(JSON.stringify(this.blockchain.chain)) //send as a string since its an object(the .chain)
     }
 
+  
     //f(x) for true decentralization where the peers connect auto to other ws
     connectToPeers(){
         peers.forEach(peer => {
@@ -40,4 +46,14 @@ export default class P2PServer {
         this.connectToPeers();
         console.log(`Listening for P2P connections on: ${P2P_PORT}`);
     }
+
+    //handles msgs between
+    messageHandler(socket){
+        socket.on("message", message => {
+            //JSON.parse (back to regular object)
+            const data = JSON.parse(message)
+            console.log("data", data); 
+        })
+    }
+  
 }
