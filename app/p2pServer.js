@@ -11,6 +11,18 @@ export default class P2PServer {
         this.sockets = [];
     }
 
+    //function to open a server using static server WebSocket f(x) in the ws package 
+    listen(){
+        const server = new WebSocketServer({ port: P2P_PORT });
+
+        server.on('connection', (socket) => {
+            this.connectSocket(socket) //accept other sockets to connect to this server 
+        });
+
+        this.connectToPeers();
+        console.log(`Listening for P2P connections on: ${P2P_PORT}`);
+    }
+
     //function to interact with socket, all sockets run via here
     connectSocket(socket){
 
@@ -20,7 +32,7 @@ export default class P2PServer {
         console.log("Socket connected");
 
         this.messageHandler(socket); //receive
-        socket.send(JSON.stringify(this.blockchain.chain)) //send as a string since its an object(the .chain)
+        socket.send(JSON.stringify(this.blockchain.chain)) //send as a string since its an object(the .chain) //sendChain
     }
 
   
@@ -35,17 +47,6 @@ export default class P2PServer {
         })
     }
 
-    //function to open a server using static server WebSocket f(x) in the ws package 
-    listen(){
-        const server = new WebSocketServer({ port: P2P_PORT });
-
-        server.on('connection', (socket) => {
-            this.connectSocket(socket) //accept other sockets to connect to this server 
-        });
-
-        this.connectToPeers();
-        console.log(`Listening for P2P connections on: ${P2P_PORT}`);
-    }
 
     //handles msgs between
     messageHandler(socket){
@@ -53,6 +54,15 @@ export default class P2PServer {
             //JSON.parse (back to regular object)
             const data = JSON.parse(message)
             console.log("data", data); 
+
+            this.blockchain.replaceChain(data); //update the current bc with longest one received by that socket 
+        })
+    }
+
+    //used in app(index.js) for every peer to replace their chains with latest and longest
+    synchronizeChain(){ 
+        this.sockets.forEach(socket => {
+            socket.send(JSON.stringify(this.blockchain.chain))
         })
     }
   
