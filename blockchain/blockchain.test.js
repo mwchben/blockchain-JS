@@ -80,3 +80,4 @@ describe('The Blockchain', ()=>{
 // the type system protects against the problems with using non-strict equality in JS.
 // Let me know if you still have issues using toEqual instead.
 
+//issue solved
