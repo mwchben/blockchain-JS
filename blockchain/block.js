@@ -51,9 +51,9 @@ class Block{
     }
     //f(x) that requires only the block input to generate hash of a block
     static blockHash (block) {
-        const { timestamp, lastBlock, data } = block; //es6 destructuring (makes it easy to extract only what is needed.)
+        const { timestamp, lastHash, data } = block; //es6 destructuring (makes it easy to extract only what is needed.)
 
-        return Block.hash(timestamp,lastBlock,data)
+        return Block.hash(timestamp,lastHash,data)
     }
     //...........................................................................
 }
