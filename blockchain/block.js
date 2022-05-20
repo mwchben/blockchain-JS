@@ -22,6 +22,7 @@ class Block{
         Timestamp-> ${this.timestamp}
         lastHash-> ${this.lastHash.substring(0,12)}
         hash-> ${this.hash.substring(0,12)}
+        Nonce-> ${this.nonce}
         data-> ${this.data}
         `;
     }
@@ -31,19 +32,28 @@ class Block{
     //new - create new instance of the Block class 
     //this - the f(x) itself
     static genesis(){
-        return new this('begins','____','first67hash23',[]);
+        return new this('begins', '____', 'first67hash23' , [], 0);
     }
 
     //this f(x) will require 2 params i.e lastBlock to get its hash and the new data to be read
+    //this f(x) will create new instances of a block rather than the genesis block
     //the generation of the hashes based on the lastBlock links the blocks 2gther hence the blockchain
     //sha256(`${timestamp} ${lastHash} ${data}`)
     static mineBlock(lastBlock, data){
-        const timestamp = Date.now();
+
+        let hash, timestamp;
         const lastHash = lastBlock.hash;
-        const hash = sha256(`${timestamp} ${lastHash} ${data}`).toString();
-        //or = Block.hash(timestamp,lastHash,data);
+        let nonce = 0;
+
+        do {
+            nonce++;
+            timestamp = Date.now();
+            hash = sha256(`${timestamp} ${lastHash} ${data}`).toString();
+            //or = Block.hash(timestamp,lastHash,data);
+        } while (hash.substring(0,DIFFICULTY) !== '0'.repeat(DIFFICULTY));
+
         
-        return new this(timestamp,lastHash,hash,data);
+        return new this(timestamp,lastHash,hash,data,nonce);
     }
 
     //...........................................................................
@@ -53,9 +63,9 @@ class Block{
     }
     //f(x) that requires only the block input to generate hash of a block
     static blockHash (block) {
-        const { timestamp, lastHash, data } = block; //es6 destructuring (makes it easy to extract only what is needed.)
+        const { timestamp, lastHash, data, nonce } = block; //es6 destructuring (makes it easy to extract only what is needed.)
 
-        return Block.hash(timestamp,lastHash,data)
+        return Block.hash(timestamp,lastHash,data,nonce)
     }
     //...........................................................................
 }
