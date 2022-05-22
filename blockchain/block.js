@@ -1,7 +1,7 @@
 
 import sha256 from 'crypto-js/sha256.js';
 import { DIFFICULTY } from '../config.js';
-// const DIFFICULTY = 2;
+
 
 //constructor -> function that helps us define unique attributes for any  instance of a class
 //and assign them to args passed

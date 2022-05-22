@@ -1,3 +1,3 @@
-const DIFFICULTY = 1;
+const DIFFICULTY = 5;
 
 export { DIFFICULTY };

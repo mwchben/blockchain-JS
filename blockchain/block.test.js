@@ -5,8 +5,7 @@ import { DIFFICULTY } from '../config.js';
 describe ('Block', ()=>{
     //use let(declare vars) for the whole scope of the describe f(x) instead of const in beforeEach
     let data,lastBlock,aBlock;
-    // const DIFFICULTY = 2;
-
+  
     beforeEach( ()=>{
         //the assignment
         data = 'vote';
@@ -24,6 +23,7 @@ describe ('Block', ()=>{
 
     it( 'generates a hash that matches the difficulty level', ()=>{
         expect(aBlock.hash.substring(0,DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
+        console.log(aBlock.hash);
     });
 
     //expect() takes an object as  1st input 
