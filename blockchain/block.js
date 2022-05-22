@@ -1,6 +1,7 @@
 
 import sha256 from 'crypto-js/sha256.js';
-import { DIFFICULTY } from '../config';
+//import { DIFFICULTY } from '../config.js';
+const DIFFICULTY = 2;
 
 //constructor -> function that helps us define unique attributes for any  instance of a class
 //and assign them to args passed
@@ -48,7 +49,7 @@ class Block{
         do {
             nonce++;
             timestamp = Date.now();
-            hash = sha256(`${timestamp} ${lastHash} ${data}`).toString();
+            hash = sha256(`${timestamp} ${lastHash} ${data} ${nonce}`).toString();
             //or = Block.hash(timestamp,lastHash,data);
         } while (hash.substring(0,DIFFICULTY) !== '0'.repeat(DIFFICULTY));
 
