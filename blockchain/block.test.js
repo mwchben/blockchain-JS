@@ -1,11 +1,11 @@
 import Block from './block.js';
-//import { DIFFICULTY } from '../config.js';
+import { DIFFICULTY } from '../config.js';
 
 
 describe ('Block', ()=>{
     //use let(declare vars) for the whole scope of the describe f(x) instead of const in beforeEach
     let data,lastBlock,aBlock;
-    const DIFFICULTY = 2;
+    // const DIFFICULTY = 2;
 
     beforeEach( ()=>{
         //the assignment
