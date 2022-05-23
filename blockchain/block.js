@@ -25,6 +25,7 @@ class Block{
         lastHash-> ${this.lastHash.substring(0,12)}
         hash-> ${this.hash.substring(0,12)}
         Nonce-> ${this.nonce}
+        difficulty -> ${this.difficulty}
         data-> ${this.data}
         `;
     }
@@ -34,7 +35,7 @@ class Block{
     //new - create new instance of the Block class 
     //this - the f(x) itself
     static genesis(){
-        return new this('begins', '____', 'first67hash23' , [], 0);
+        return new this('begins', '____', 'first67hash23' , [], 0, DIFFICULTY);
     }
 
     //this f(x) will require 2 params i.e lastBlock to get its hash and the new data to be read
@@ -45,29 +46,37 @@ class Block{
 
         let hash, timestamp;
         const lastHash = lastBlock.hash;
+        let { difficulty } = lastBlock;
         let nonce = 0;
 
         do {
             nonce++;
             timestamp = Date.now();
-            hash = sha256(`${timestamp} ${lastHash} ${data} ${nonce}`).toString();
+            difficulty = Block.adjustDiff(lastBlock,timestamp); 
+            hash = sha256(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
             //or = Block.hash(timestamp,lastHash,data);
-        } while (hash.substring(0,DIFFICULTY) !== '0'.repeat(DIFFICULTY));
+        } while (hash.substring(0,difficulty) !== '0'.repeat(difficulty));
 
         
-        return new this(timestamp,lastHash,hash,data,nonce);
+        return new this(timestamp,lastHash,hash,data,nonce,difficulty);
     }
 
     //...........................................................................
     //for use in the blockHash f(x)
-    static hash (timestamp, lastHash, data, nonce){
-        return sha256(`${timestamp} ${lastHash} ${data} ${nonce}`).toString();
+    static hash (timestamp, lastHash, data, nonce, difficulty){
+        return sha256(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
     }
     //f(x) that requires only the block input to generate hash of a block
     static blockHash (block) {
-        const { timestamp, lastHash, data, nonce } = block; //es6 destructuring (makes it easy to extract only what is needed.)
+        const { timestamp, lastHash, data, nonce, difficulty } = block; //es6 destructuring (makes it easy to extract only what is needed.)
 
-        return Block.hash(timestamp,lastHash,data,nonce)
+        return Block.hash(timestamp,lastHash,data,nonce,difficulty)
+    }
+    static adjustDiff(lastBlock, currentTime){
+        let {difficulty } = lastBlock;
+        difficulty = MINERATE + lastBlock.timestamp > currentTime ? difficulty + 1 : difficulty - 1;
+        //the timestamp is added (to the checker i.e, MINERATE )since current time has greator value 
+        return difficulty;
     }
     //...........................................................................
 }

@@ -1,4 +1,4 @@
-const DIFFICULTY = 3;
+const DIFFICULTY = 2;
 const MINERATE = 3000;
 
 export { DIFFICULTY,MINERATE };
