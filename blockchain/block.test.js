@@ -23,7 +23,7 @@ describe ('Block', ()=>{
 
     it( 'generates a hash that matches the difficulty level', ()=>{
         expect(aBlock.hash.substring(0,DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
-        console.log(aBlock.hash);
+        console.log(aBlock.toString());
     });
 
     //expect() takes an object as  1st input 

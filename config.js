@@ -1,3 +1,4 @@
-const DIFFICULTY = 5;
+const DIFFICULTY = 3;
+const MINERATE = 3000;
 
-export { DIFFICULTY };
+export { DIFFICULTY,MINERATE };

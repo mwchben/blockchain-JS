@@ -1,6 +1,6 @@
 
 import sha256 from 'crypto-js/sha256.js';
-import { DIFFICULTY } from '../config.js';
+import { DIFFICULTY,MINERATE } from '../config.js';
 
 
 //constructor -> function that helps us define unique attributes for any  instance of a class
@@ -10,12 +10,13 @@ import { DIFFICULTY } from '../config.js';
 //the block will have *(timestamp, lastHash, hash based on its own data and data itself)
 //toString (debugging) returns what the specific instance of the class looks like
 class Block{
-    constructor(timestamp, lastHash, hash, data, nonce){
+    constructor(timestamp, lastHash, hash, data, nonce, difficulty){
         this.timestamp = timestamp;
         this.lastHash = lastHash;
         this.hash = hash;
         this.data = data;
         this.nonce = nonce;
+        this.difficulty = difficulty || DIFFICULTY;
     }
 
     toString(){
