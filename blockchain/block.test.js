@@ -22,8 +22,11 @@ describe ('Block', ()=>{
     });
 
     it( 'generates a hash that matches the difficulty level', ()=>{
-        expect(aBlock.hash.substring(0,DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
+        expect(aBlock.hash.substring(0,aBlock.difficulty)).toEqual('0'.repeat(aBlock.difficulty));
         console.log(aBlock.toString());
+    });
+    it( 'lowers the difficulty for slowly mined blocks', ()=>{
+        expect(Block.adjustDiff(aBlock, aBlock.timestamp+360000)).toEqual(aBlock.difficulty - 1);
     });
 
     //expect() takes an object as  1st input 
