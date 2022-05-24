@@ -1,4 +1,4 @@
-import Block from './block.js';
+import Block from './blockchain/block.js';
 
 const block = new Block('time','lastHash','hash','data');
 

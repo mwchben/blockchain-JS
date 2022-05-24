@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest --watchAll",
-    "dev-test": "nodemon dev-test",
+    "dev-block-test": "nodemon dev-block-test",
+    "dev-bc-test": "nodemon dev-bc-test",
     "start": "node ./app",
     "dev": "nodemon ./app"
   },
