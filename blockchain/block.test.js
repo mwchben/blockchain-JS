@@ -1,5 +1,6 @@
 import Block from './block.js';
-import { DIFFICULTY } from '../config.js';
+// import { DIFFICULTY } from '../config.js';
+// was used here it( 'generates a hash that matches the difficulty level', ()=>{
 
 
 describe ('Block', ()=>{
@@ -27,6 +28,9 @@ describe ('Block', ()=>{
     });
     it( 'lowers the difficulty for slowly mined blocks', ()=>{
         expect(Block.adjustDiff(aBlock, aBlock.timestamp+360000)).toEqual(aBlock.difficulty - 1);
+    });
+    it( 'raises the difficulty for quickly mined blocks', ()=>{
+        expect(Block.adjustDiff(aBlock, aBlock.timestamp+1)).toEqual(aBlock.difficulty + 1);
     });
 
     //expect() takes an object as  1st input 
