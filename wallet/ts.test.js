@@ -22,4 +22,17 @@ describe('The Transaction Test', ()=>{
         expect(ts.outputs.find( output => output.address === recepient ).amount)
         .toEqual(amount)
     })
+
+    describe("Ts amount exceeds the balance", ()=> {
+        beforeEach(()=>{
+            amount = 50000;
+            ts = Ts.newTs(wallet,recepient,amount);
+        })
+    
+        it("does not create the Ts ", ()=> {
+            expect(ts).toEqual(undefined)
+        })
+    })
 })
+
+
