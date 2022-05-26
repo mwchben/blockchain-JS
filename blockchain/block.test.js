@@ -3,7 +3,7 @@ import Block from './block.js';
 // was used here it( 'generates a hash that matches the difficulty level', ()=>{
 
 
-describe ('Block', ()=>{
+describe ('The Block', ()=>{
     //use let(declare vars) for the whole scope of the describe f(x) instead of const in beforeEach
     let data,lastBlock,aBlock;
   

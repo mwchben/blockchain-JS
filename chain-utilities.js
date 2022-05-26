@@ -1,7 +1,9 @@
 import pkg from 'elliptic';
 const {ec: EC } = pkg;
 const ec = new EC('secp256k1');
-import uuidV1 from 'uuid';
+
+import { v1 as uuidv1 } from 'uuid';
+
 
  
 class ChainUtil{
@@ -11,7 +13,7 @@ class ChainUtil{
     }
 
     static id(){
-        return uuidV1();
+        return uuidv1();
     }
 }
 
