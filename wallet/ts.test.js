@@ -13,13 +13,13 @@ describe('The Transaction Test', ()=>{
     })
 
     it("outputs `amount` subtracted from tha wallet baln", ()=> {
-        expect(ts.outputs.find( output => output.address === address.publicKey ))
+        expect(ts.outputs.find( output => output.address === wallet.publicKey ).amount)
         //read as .find (this output {{ whose i.e., => }} address in outputs property equals this publicKey )
         .toEqual(wallet.balance - amount)
     })
-
+    
     it("outputs `amount` added to the receipient", ()=> {
-        expect(ts.outputs.find( output => output.address === recepient ))
+        expect(ts.outputs.find( output => output.address === recepient ).amount)
         .toEqual(amount)
     })
 })

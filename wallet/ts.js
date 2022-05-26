@@ -8,13 +8,13 @@ import ChainUtil from "../chain-utilities.js";
     }
 
     static newTs(senderWallet, recepient, amount){
-        
+        const ts = new Ts();
 
         if (amount > senderWallet.balance){
             console.log(`The amount ${amount} exceeds wallet balance`);
             return;
         }
-        const ts = new this();
+
         ts.outputs.push(...[
             { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
             { amount, address: recepient }
