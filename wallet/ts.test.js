@@ -23,6 +23,11 @@ describe('The Transaction Test', ()=>{
         .toEqual(amount)
     })
 
+    //test to prove input Ts is there by checking on balance in wallet
+    it("inputs the baln of the wallet", ()=> {
+        expect(ts.input.amount).toEqual(wallet.balance)
+    })
+
     describe("Ts amount exceeds the balance", ()=> {
         beforeEach(()=>{
             amount = 50000;
