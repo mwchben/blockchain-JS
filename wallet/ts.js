@@ -20,7 +20,22 @@ import ChainUtil from "../chain-utilities.js";
             { amount, address: recepient }
         ])
 
+        //call signTs() after outputs are created statically
+        // current ts object being created
+        Ts.signTs(ts, senderWallet);
+
         return ts;
+
+               
+    }
+    //f(x) generates the one of the input object with signature of Ts
+    static signTs(ts,senderWallet,){
+        ts.input = {
+            timestamp: Date.now(),
+            amount: senderWallet.balance,
+            address: senderWallet.publicKey,
+            signature: senderWallet.sign(ChainUtil.hash( ts.outputs ))
+        }
     }
 }
 

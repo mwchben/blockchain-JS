@@ -1,5 +1,5 @@
 
-import sha256 from 'crypto-js/sha256.js';
+import ChainUtil from '../chain-utilities.js';
 import { DIFFICULTY,MINERATE } from '../config.js';
 
 
@@ -53,7 +53,9 @@ class Block{
             nonce++;
             timestamp = Date.now();
             difficulty = Block.adjustDiff(lastBlock,timestamp); 
-            hash = sha256(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
+            hash = ChainUtil.hash(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
+            //hash = sha256(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
+            //👆🏽 was there when `import sha256 from 'crypto-js/sha256.js'; `was made
             //or = Block.hash(timestamp,lastHash,data);
         } while (hash.substring(0,difficulty) !== '0'.repeat(difficulty));
 
@@ -64,7 +66,7 @@ class Block{
     //...........................................................................
     //for use in the blockHash f(x)
     static hash (timestamp, lastHash, data, nonce, difficulty){
-        return sha256(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
+        return ChainUtil.hash(`${timestamp} ${lastHash} ${data} ${nonce} ${difficulty}`).toString();
     }
     //f(x) that requires only the block input to generate hash of a block
     static blockHash (block) {
