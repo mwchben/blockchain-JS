@@ -28,6 +28,16 @@ describe('The Transaction Test', ()=>{
         expect(ts.input.amount).toEqual(wallet.balance)
     })
 
+    //does it validate a ts and invalidate it? the ts comes also with 
+    //signatures & come from unique senders
+    it("it validates a valid Ts", ()=> {
+        expect(Ts.verifyTs(ts)).toBe(true)
+    })
+    it("it invalidates a corrupt Ts", ()=> {
+        ts.outputs[0].amount = 50000;
+        expect(Ts.verifyTs(ts)).toBe(false)
+    })
+
     describe("Ts amount exceeds the balance", ()=> {
         beforeEach(()=>{
             amount = 50000;
