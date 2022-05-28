@@ -37,6 +37,13 @@ import ChainUtil from "../chain-utilities.js";
             signature: senderWallet.sign(ChainUtil.hash( ts.outputs ))
         }
     }
+
+    //from the verifySignature method to verify the Ts as true
+    static verifyTs(ts){
+        return ChainUtil.verifySignature ( // ( publicKey, signature, dataHash )
+            ts.input.address, ts.input.signature, ChainUtil.hash(ts.outputs)
+        )
+    }
 }
 
 export default Ts;

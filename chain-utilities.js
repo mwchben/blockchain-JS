@@ -22,6 +22,11 @@ class ChainUtil{
     static hash(data){
         return sha256(JSON.stringify(data)).toString();
     }
+
+    //verify sign using publicKey that was signed by a private key of sender
+    static verifySignature(publicKey, signature, dataHash){
+        return ec.keyFromPublic(publicKey,'hex').verify(dataHash, signature)
+    }
 }
 
 export default ChainUtil;
