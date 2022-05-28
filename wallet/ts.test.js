@@ -48,6 +48,25 @@ describe('The Transaction Test', ()=>{
             expect(ts).toEqual(undefined)
         })
     })
+
+    describe("Updating the Ts", ()=> {
+
+        let nextAmount, nextRecepient
+        beforeEach(()=>{
+            nextAmount = 20;
+            nextRecepient = "n3xt-4ddr355";
+            ts = ts.update(wallet, nextRecepient, nextAmount);
+        })
+    
+        it("subtracts  the next Amount from the sender's output", ()=> {
+            expect(ts.outputs.find(output => output.address === wallet.publicKey).amount)
+            .toEqual(wallet.balance - amount - nextAmount )
+        })
+        it("outputs the amount for the next recepient", ()=> {
+            expect(ts.outputs.find(output => output.address === nextRecepient).amount)
+            .toEqual( nextAmount )
+        })
+    })
 })
 
 
