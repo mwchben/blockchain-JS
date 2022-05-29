@@ -7,8 +7,8 @@ class TsPool {
         this.tsns = [];
     }
 
-    UpdateOrAddTs(ts){
-        let tsWithID = this.tsns.find(t = t.id === ts.id);
+    updateOrAddTs(ts){
+        let tsWithID = this.tsns.find(t => t.id === ts.id);
 
         if(tsWithID){
             //replace ts at this index with incoming ts 
