@@ -1,4 +1,3 @@
-import { send } from "express/lib/response";
 import ChainUtil from "../chain-utilities.js";
 
   class Ts {
@@ -24,7 +23,7 @@ import ChainUtil from "../chain-utilities.js";
 
         return this;
     }
-
+    
     static newTs(senderWallet, recepient, amount){
         const ts = new Ts();
 

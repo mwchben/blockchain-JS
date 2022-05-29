@@ -9,7 +9,7 @@ describe("Transaction Pool", ()=> {
     beforeEach(()=>{
         tsPool = new TsPool();
         wallet = new Wallet();
-        ts = new Ts(wallet, 'r4nd-4dr355', 30);
+        ts = new Ts.newTs(wallet, 'r4nd-4dr355', 30);
         tsPool.updateOrAddTs(ts);
     })
 
