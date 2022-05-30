@@ -18,6 +18,10 @@ class TsPool {
             this.tsns.push(ts) 
         }
     }
+
+    existingTs(address){
+        return this.tsns.find(t => t.input.address === address);
+    }
 }
 
 export default TsPool;
