@@ -4,7 +4,7 @@
 
 class TsPool {
     constructor(){
-        this.tsns = [];
+        this.tsns = []; //will be used in Get endpoint to show transactions
     }
 
     updateOrAddTs(ts){
