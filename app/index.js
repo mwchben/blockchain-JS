@@ -1,12 +1,19 @@
 //api app for user interaction with http req (GET,POST)
 
-import Blockchain from "../blockchain/blockchain.js";
+
 import express from "express";
 import bodyParser from "body-parser";
 import P2PServer from "./p2pServer.js";
+//for the bc
+import Blockchain from "../blockchain/blockchain.js";
+//for the wallet
+import Wallet from "../wallet/index.js";
+import TsPool from "../wallet/ts-pool.js";
 
 const app = express();
 const bc = new Blockchain();
+const wallet = new Wallet();
+const tsPool = new TsPool();
 const p2pServer = new P2PServer(bc);
 
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
@@ -24,6 +31,10 @@ app.post('/mine', (req,res) => {
 
     p2pServer.synchronizeChain();
     res.redirect('/blocks')
+})
+
+app.get('/ts',(req,res) => {
+    res.json(tsPool.tsns)
 })
 
 app.listen(HTTP_PORT, () => 
