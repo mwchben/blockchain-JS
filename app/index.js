@@ -33,8 +33,16 @@ app.post('/mine', (req,res) => {
     res.redirect('/blocks')
 })
 
-app.get('/ts',(req,res) => {
+//GET
+app.get('/tsns',(req,res) => {
     res.json(tsPool.tsns)
+})
+
+//POST::transact consist of recipient and amount
+app.post('/transact',(req,res) => {
+    const { recepient, amount } = req.body;
+    const ts = wallet.createTs(recepient, amount, tsPool);
+    res.redirect('/tsns')
 })
 
 app.listen(HTTP_PORT, () => 
