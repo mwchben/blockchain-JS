@@ -14,7 +14,7 @@ const app = express();
 const bc = new Blockchain();
 const wallet = new Wallet();
 const tsPool = new TsPool();
-const p2pServer = new P2PServer(bc);
+const p2pServer = new P2PServer(bc, tsPool);
 
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 

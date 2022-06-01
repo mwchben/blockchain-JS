@@ -5,9 +5,15 @@ const P2P_PORT = process.env.P2P_PORT || 5001;
 //check if peers are present and put 'em in an array separated  by comma else set an empty arrat
 const peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 
+const MESSAGE_TYPES = {
+    chain: "CHAIN",
+    ts: "TS"
+}
+
 export default class P2PServer {
-    constructor (blockchain){
+    constructor (blockchain,tsPool){
         this.blockchain = blockchain;
+        this.tsPool = tsPool;
         this.sockets = [];
     }
 
@@ -59,11 +65,40 @@ export default class P2PServer {
         })
     }
 
+
+    sendChain(socket){
+        socket.send(JSON.stringify( 
+            {
+                type: MESSAGE_TYPES.chain, //object type
+                chain: this.blockchain.chain //object key
+            } ))
+    }
+    sendTs(socket,ts){
+        socket.send(JSON.stringify(
+            { 
+                type: MESSAGE_TYPES.ts, 
+                ts //es6 destructured
+            } ))
+    }
     //used in app(index.js) for every peer to replace their chains with latest and longest
     synchronizeChain(){ 
-        this.sockets.forEach(socket => {
-            socket.send(JSON.stringify(this.blockchain.chain))
-        })
+        //forEach socket within the local array of sockets
+        this.sockets.forEach(socket => this.sendChain(socket))
+    }
+    broadcastTs(ts){ 
+        this.sockets.forEach(socket => this.sendTs(socket,ts))
     }
   
 }
+
+
+//..................Earlier synchChain code........................
+// synchronizeChain(){ 
+//     this.sockets.forEach(socket => {
+//         socket.send(JSON.stringify(this.blockchain.chain))
+//     })
+// }
+
+//the socket will have two data's { blockchain & ts } hence to differenciate them::
+//1. attach unique type values to each data we send over a socket
+//2. update msgHandler to handle incoming types and run different code based on theat
