@@ -52,7 +52,7 @@ app.post('/transact',(req,res) => {
 //..................................................End of Transaction.................................................
 
 
-//method to expose user's public key of their wallet
+//................method to expose user's public key of their wallet...................................................
 app.get('/public-key',(req,res) => {
     res.json(
         {
