@@ -20,6 +20,7 @@ const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 app.use(bodyParser.json());
 
+//..................................................BlockChain...............................................
 app.get('/blocks', (req,res) => {
     res.json(bc.chain)
 })
@@ -32,7 +33,9 @@ app.post('/mine', (req,res) => {
     p2pServer.synchronizeChain(); //handle decentralization
     res.redirect('/blocks')
 })
+//..................................................End of BlockChain...............................................
 
+//..................................................Transaction.....................................................
 //GET
 app.get('/tsns',(req,res) => {
     res.json(tsPool.tsns)
@@ -45,6 +48,16 @@ app.post('/transact',(req,res) => {
 
     p2pServer.broadcastTs(ts); //handle decentralization
     res.redirect('/tsns')
+})
+//..................................................End of Transaction.................................................
+
+
+//method to expose user's public key of their wallet
+app.get('/public-key',(req,res) => {
+    res.json(
+        {
+            publicKey: wallet.publicKey
+        })
 })
 
 app.listen(HTTP_PORT, () => 
