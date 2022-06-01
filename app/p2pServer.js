@@ -10,6 +10,7 @@ const MESSAGE_TYPES = {
     ts: "TS"
 }
 
+//serve two f(x) of sync'n bchains & keeps tsPool upToDate
 export default class P2PServer {
     constructor (blockchain,tsPool){
         this.blockchain = blockchain;
@@ -54,14 +55,21 @@ export default class P2PServer {
     }
 
 
-    //handles msgs between
+    //handles msgs i.e., between listening 4 mesg and parsing it as data
     messageHandler(socket){
         socket.on("message", message => {
-            //JSON.parse (back to regular object)
-            const data = JSON.parse(message)
-            console.log("data", data); 
+            
+            const data = JSON.parse(message) //JSON.parse (back to regular object)
+            //console.log("data", data); & run switch case for the two types of data
 
-            this.blockchain.replaceChain(data); //update the current bc with longest one received by that socket 
+            switch (data.type) {
+                case MESSAGE_TYPES.chain:
+                    this.blockchain.replaceChain(data.chain); //update the current bc with longest one received by that socket 
+                    break;
+                case MESSAGE_TYPES.ts:
+                    this.tsPool.updateOrAddTs(data.ts); 
+                    break;
+            }
         })
     }
 
