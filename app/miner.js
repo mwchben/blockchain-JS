@@ -18,6 +18,8 @@ class Miner {
     }
 }
 
+export default Miner;
+
 //take ts(data) from tsPool -> 
 //tell p2pServer to sync chain & include new block with this ts ->
 //tell tsPool to clear its ts which have been included in the bc
