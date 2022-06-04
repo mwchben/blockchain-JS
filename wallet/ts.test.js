@@ -1,5 +1,6 @@
 import Ts from "./ts.js";
 import Wallet from "./index.js";
+import { MINER_REWARD } from "../config.js";
 
 describe('The Transaction Test', ()=>{
 
@@ -65,6 +66,15 @@ describe('The Transaction Test', ()=>{
         it("outputs the amount for the next recepient", ()=> {
             expect(ts.outputs.find(output => output.address === nextRecepient).amount)
             .toEqual( nextAmount )
+        })
+    })
+
+    describe("creating a reward transaction",()=>{
+        beforeEach(()=>{
+            ts = Ts.rewardTs(wallet, Wallet.bcWallet())
+        })
+        it("rewards the miner's wallet",()=>{
+            expect(ts.outputs.find(output => output.address == wallet.publicKey).amount).toEqual(MINER_REWARD)
         })
     })
 })

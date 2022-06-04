@@ -39,6 +39,12 @@ class Wallet {
 
         return ts;
     }
+
+    static bcWallet(){
+        const bcWallet = new this();
+        bcWallet.address = "blockchain-wallet";
+        return bcWallet;
+    }
 } 
 
 
