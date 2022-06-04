@@ -1,4 +1,5 @@
 import ChainUtil from "../chain-utilities.js";
+import { MINER_REWARD } from "../config.js";
 
   class Ts {
     constructor(){
@@ -24,39 +25,59 @@ import ChainUtil from "../chain-utilities.js";
         return this;
     }
     
-    static newTs(senderWallet, recepient, amount){
+    //helper f(x) generate ts based on giving outputs i.e., for miner reward (signed by bc wallet)
+    //and normal ts (signed by sender) 
+    static tsWithOutputs (senderWallet, outputs ){
         const ts = new Ts();
+
+        ts.outputs.push(...outputs); //pushing the outputs from the 2nd arg
+
+        Ts.signTs(ts, senderWallet); 
+
+        return ts;
+    }
+
+    static newTs(senderWallet, recepient, amount){
+        // const ts = new Ts();
 
         if (amount > senderWallet.balance){
             console.log(`The amount ${amount} exceeds wallet balance`);
             return;
         }
 
-        //the two objects in ts outputs are are:
-        //output 1: output with amount remaining and senders address
-        //output 2: output with amount going out and receipient address
-        //i.e.,
-        // [
-        //     { input: timestamp, balance: 500, signature, sendersPublicKey: 0xfoo1 } -> can send to many addresses
-        //     { output 1: amount: 460, address:0xfoo1 }
-        //     { output 2: amount: 40, address:0xfoo2 }
-        // ]
-        //since we can update the Ts with a new ts (sending token to another address) we can add a Ts Update
-        // i.e., in output 2: amount: 20, address: 0xfoo3 hence  the update f(x) on top of newTs
+            //the two objects in ts outputs are are:
+            //output 1: output with amount remaining and senders address
+            //output 2: output with amount going out and receipient address
+            //i.e.,
+            // [
+            //     { input: timestamp, balance: 500, signature, sendersPublicKey: 0xfoo1 } -> can send to many addresses
+            //     { output 1: amount: 460, address:0xfoo1 }
+            //     { output 2: amount: 40, address:0xfoo2 }
+            // ]
+            //since we can update the Ts with a new ts (sending token to another address) we can add a Ts Update
+            // i.e., in output 2: amount: 20, address: 0xfoo3 hence  the update f(x) on top of newTs
 
-        ts.outputs.push(...[
+        // ts.outputs.push(...[
+        //     { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
+        //     { amount, address: recepient }
+        // ])
+
+            //call signTs() after outputs are created statically
+            // current ts object being created
+        // Ts.signTs(ts, senderWallet);
+
+        return Ts.tsWithOutputs(senderWallet, [ //this  [] is the 2nd output arg
             { amount: senderWallet.balance - amount, address: senderWallet.publicKey },
             { amount, address: recepient }
-        ])
-
-        //call signTs() after outputs are created statically
-        // current ts object being created
-        Ts.signTs(ts, senderWallet);
-
-        return ts;
-
-               
+         ]);           
     }
+
+    static rewardTs(minerWallet, bcWallet){ //will generate sign to confirm & auth reward ts and not miner 
+        return Ts.tsWithOutputs(bcWallet, [{
+            amount: MINER_REWARD, address: minerWallet.publicKey
+        }])
+    }
+
     //f(x) generates the one of the input object with signature of Ts
     static signTs(ts,senderWallet,){
         ts.input = {
