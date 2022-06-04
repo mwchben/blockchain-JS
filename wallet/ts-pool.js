@@ -1,6 +1,7 @@
 //t = index of ts
 //ts = transaction
 //tsns = transactions
+import Ts from "./ts.js";
 
 class TsPool {
     constructor(){
@@ -21,6 +22,26 @@ class TsPool {
 
     existingTs(address){
         return this.tsns.find(t => t.input.address === address);
+    }
+
+    validTransactions(){
+        return this.tsns.filter(ts => {
+            const outputTotal = ts.outputs.reduce((total, output) => {
+                return total + output.amount;
+            },0)
+
+            if (ts.input.amount !== outputTotal ) {
+                console.log(`Invalid transaction amount from ${ts.input.address}`);
+                return;
+            }
+
+            if (!Ts.verifyTs(ts)) {
+                console.log(`Invalid signature from ${ts.input.address}`);
+                return;
+            }
+
+            return ts;
+        })
     }
 }
 
