@@ -24,7 +24,7 @@ class TsPool {
         return this.tsns.find(t => t.input.address === address);
     }
 
-    validTransactions(){
+    validTransactions(){  //refactor with testValidTransactions
         return this.tsns.filter(ts => {
             const outputTotal = ts.outputs.reduce((total, output) => {
                 return total + output.amount;
@@ -42,6 +42,10 @@ class TsPool {
 
             return ts;
         })
+    }
+
+    clearTsns(){
+        this.tsns = [];
     }
 }
 
