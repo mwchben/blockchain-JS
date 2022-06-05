@@ -27,6 +27,11 @@ describe("Transaction Pool", ()=> {
         expect(JSON.stringify(tsPool.tsns.find(t => t.id === newTs.id)))
         .not.toEqual( oldTs )
     })
+    //clears tsns
+    it("clears transactions", ()=> {
+        tsPool.clearTsns();
+        expect(tsPool.tsns).toEqual([])
+    })
 
     describe("mixing valid & corrupt ts", ()=> {
         let validTsns;
