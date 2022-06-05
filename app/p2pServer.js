@@ -7,8 +7,9 @@ const peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 
 const MESSAGE_TYPES = {
     chain: "CHAIN",
-    ts: "TS"
-}
+    ts: "TS",
+    clear_tsns: "CLEAR_TSNS"
+};
 
 //serve two f(x) of sync'n bchains & keeps tsPool upToDate
 export default class P2PServer {
@@ -60,7 +61,7 @@ export default class P2PServer {
         socket.on("message", message => {
             
             const data = JSON.parse(message) //JSON.parse (back to regular object)
-            //console.log("data", data); & run switch case for the two types of data
+            //console.log("data", data); & run switch case for the three types of data
 
             switch (data.type) {
                 case MESSAGE_TYPES.chain:
@@ -68,6 +69,9 @@ export default class P2PServer {
                     break;
                 case MESSAGE_TYPES.ts:
                     this.tsPool.updateOrAddTs(data.ts); 
+                    break;
+                case MESSAGE_TYPES.clear_tsns:
+                    this.tsPool.clearTsns(); 
                     break;
             }
         })
@@ -95,6 +99,12 @@ export default class P2PServer {
     }
     broadcastTs(ts){ 
         this.sockets.forEach(socket => this.sendTs(socket,ts))
+    }
+
+    broadcastClearTsns(){  //trigger clear tsns in MessageHandler()
+        this.sockets.forEach(socket => socket.send(JSON.stringify({
+            type: MESSAGE_TYPES.clear_tsns 
+        }))) 
     }
   
 }
