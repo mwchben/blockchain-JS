@@ -15,14 +15,15 @@
         "data": "truth",
         "nonce": 6,
         "difficulty": 1
-    }
-]
+    },
+//]
+
 
 //.................................................................................................//
 // After a miner adds a transaction pool to bc and it becomes a block
 // and therefore gets a reward of 50
 
-[
+//[
     {
         "timestamp": "begins",
         "lastHash": "____",
