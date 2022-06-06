@@ -9,12 +9,15 @@ import Blockchain from "../blockchain/blockchain.js";
 //for the wallet
 import Wallet from "../wallet/index.js";
 import TsPool from "../wallet/ts-pool.js";
+//miner reward
+import Miner from "./miner.js";
 
 const app = express();
 const bc = new Blockchain();
 const wallet = new Wallet();
 const tsPool = new TsPool();
 const p2pServer = new P2PServer(bc, tsPool);
+const miner = new Miner(bc, tsPool, wallet, p2pServer);
 
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
@@ -48,6 +51,13 @@ app.post('/transact',(req,res) => {
 
     p2pServer.broadcastTs(ts); //handle decentralization
     res.redirect('/tsns')
+})
+
+app.get('/mine-transactions', (req, res) => {
+    const block = miner.mine();
+
+    console.log(`New block added: ${block.toString()}`);
+    res.redirect('/blocks')
 })
 //..................................................End of Transaction.................................................
 

@@ -1,6 +1,6 @@
-import Wallet from "../wallet";
-import Ts from "../wallet/ts";
-import TsPool from "../wallet/ts-pool";
+import Wallet from "../wallet/index.js";
+import Ts from "../wallet/ts.js";
+
 
 class Miner {
     constructor(blockchain, tsPool, wallet, p2pServer){
