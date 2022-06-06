@@ -1,0 +1,90 @@
+//mining a block the genesisBlock + the resulting block 
+[
+    {
+        "timestamp": "begins",
+        "lastHash": "____",
+        "hash": "first67hash23",
+        "data": [],
+        "nonce": 0,
+        "difficulty": 2
+    },
+    {
+        "timestamp": 1654543230464,
+        "lastHash": "first67hash23",
+        "hash": "0e2c78e943c10d79a6367eb3ca19b501f0255da3625fa0bbeca11fe2a1f15b79",
+        "data": "truth",
+        "nonce": 6,
+        "difficulty": 1
+    }
+]
+
+//.................................................................................................//
+// After a miner adds a transaction pool to bc and it becomes a block
+// and therefore gets a reward of 50
+
+[
+    {
+        "timestamp": "begins",
+        "lastHash": "____",
+        "hash": "first67hash23",
+        "data": [],
+        "nonce": 0,
+        "difficulty": 2
+    },
+    {
+        "timestamp": 1654542480460,
+        "lastHash": "first67hash23",
+        "hash": "03a3be8189b898c2425aec1982a514a1eb9c5450c3dbfe1299ea884947482752",
+        "data": [
+            {
+                "id": "93ddef40-e5cb-11ec-a80b-bd3dfa19110d",
+                "input": {
+                    "timestamp": 1654542308144,
+                    "amount": 500,
+                    "address": "04eb68ea1cfc05df22eeefb2d68a3dba8038fd56e739f5d5f3dc6eb17e5aa0743f97caa224439f090c4ada747940aa7f746675cd22e237a4f9cabbf7f5429a5090",
+                    "signature": {
+                        "r": "eecbac8d61d085575b7e7bef53099db8c038e07187793a719e50bf359352b7b1",
+                        "s": "476c7954ea481e70775ada5976d651ea0c36472750dd1d03d0c450ee1d5b237b",
+                        "recoveryParam": 0
+                    }
+                },
+                "outputs": [
+                    {
+                        "amount": 440,
+                        "address": "04eb68ea1cfc05df22eeefb2d68a3dba8038fd56e739f5d5f3dc6eb17e5aa0743f97caa224439f090c4ada747940aa7f746675cd22e237a4f9cabbf7f5429a5090"
+                    },
+                    {
+                        "amount": 30,
+                        "address": "p4sson-4ddr355"
+                    },
+                    {
+                        "amount": 30,
+                        "address": "p4sson-4ddr355"
+                    }
+                ]
+            },
+            {
+                "id": "fba32e60-e5cb-11ec-8920-319d88ebbc94",
+                "input": {
+                    "timestamp": 1654542480455,
+                    "amount": 500,
+                    "address": "041bbeffc9724e1d366805c406a760510d2e4d2fdbcabaf83467843dd501241c39351a6124efdb0327f8ae04e874853f42326407a9f8dc49d75d11cc723e977d1b",
+                    "signature": {
+                        "r": "4f75d2f8286c4aaf854204e403243c1beb979317e77c878f429a3877d37700bb",
+                        "s": "86e7edf5302e6ae1e6a38f581655544f390334f879c93518724df8fb531e823a",
+                        "recoveryParam": 1
+                    }
+                },
+                "outputs": [
+                    {
+                        "amount": 50,
+                        "address": "0411661989ef8e6aba1f982bdb73cf23774f547fa74d085aa638618e6802639830c92abfd8e400a6ec9b96cb6d8ab762f6fe5306230b5446585d7987e0702904fd"
+                    }
+                ]
+            }
+        ],
+        "nonce": 1,
+        "difficulty": 1
+    }
+]
+
