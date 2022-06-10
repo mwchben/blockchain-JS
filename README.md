@@ -1,6 +1,7 @@
 ## A JavaScript Blockchain Network
 
-This project is for my 4th year SCIT project that will be accessible via this [link](https://#.com/) someday.
+This project is for my 4th year SCIT project that will be accessible via this [link](https://#.com/) someday. 
+I hope to build a web app overlay the network that will use the concept of blockchain for performance and integrity.
 
 ### Note 
 
