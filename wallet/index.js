@@ -40,6 +40,16 @@ class Wallet {
         return ts;
     }
 
+    calcBalance(blockchain){
+        let balance = this.balance;
+        //each ts object contained in each block ... array with history of all ts
+        let tsns = [];  
+        //for each on: -> block -> tsns
+        blockchain.chain.forEach(block => block.data.forEach(ts =>{ ts.push(ts) }));
+
+        
+    }
+
     static bcWallet(){
         const bcWallet = new this();
         bcWallet.address = "blockchain-wallet";
