@@ -50,17 +50,34 @@ class Wallet {
         //find all tsns matching this wallet's address 
         const walletInputTsns = tsns.filter(ts => tsns.input.address === this.publicKey)
 
+        let startTime = 0;
         if (walletInputTsns.length > 0) {
             //recent tsns this wallet created i.e  (timestamp is higher)
             const recentInputTs = walletInputTsns.reduce( (prev,current) => {
             prev.input.timestamp > current.input.timestamp ? prev : current  
             })
+
+         //set baln to this current ts output amount
+         balance = recentInputTs.outputs.find(output => output.address === this.publicKey).amount
+        
+         //this baln will increase with other feature tsns hence the startTime = 0 to indicate this baln at initial calc
+         startTime = recentInputTs.input.timestamp;
         }
 
-        //set baln to this current ts output amount
-        balance = recentInputTs.outputs.find(output => output.address === this.publicKey).amount
-        
-        
+       
+
+        tsns.forEach(ts => {
+            if(tsns.input.timestamp > startTime){
+                ts.outputs.find(output => {
+                    if(output.address === this.publicKey){
+                        balance += output.amount
+                    }
+
+                })
+            }
+        })
+
+        return balance;
     }
 
     static bcWallet(){
