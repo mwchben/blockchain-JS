@@ -45,10 +45,10 @@ class Wallet {
         //each ts object contained in each block ... array with history of all ts
         let tsns = [];  
         //for each on: -> block -> tsns
-        blockchain.chain.forEach(block => block.data.forEach(ts =>{ ts.push(ts) }));
+        blockchain.chain.forEach(block => block.data.forEach(ts =>{ tsns.push(ts) }));
 
         //find all tsns matching this wallet's address 
-        const walletInputTsns = tsns.filter(ts => tsns.input.address === this.publicKey)
+        const walletInputTsns = tsns.filter(ts => ts.input.address === this.publicKey)
 
         let startTime = 0;
         if (walletInputTsns.length > 0) {
@@ -67,7 +67,7 @@ class Wallet {
        
 
         tsns.forEach(ts => {
-            if(tsns.input.timestamp > startTime){
+            if(ts.input.timestamp > startTime){
                 ts.outputs.find(output => {
                     if(output.address === this.publicKey){
                         balance += output.amount
