@@ -47,6 +47,19 @@ class Wallet {
         //for each on: -> block -> tsns
         blockchain.chain.forEach(block => block.data.forEach(ts =>{ ts.push(ts) }));
 
+        //find all tsns matching this wallet's address 
+        const walletInputTsns = tsns.filter(ts => tsns.input.address === this.publicKey)
+
+        if (walletInputTsns.length > 0) {
+            //recent tsns this wallet created i.e  (timestamp is higher)
+            const recentInputTs = walletInputTsns.reduce( (prev,current) => {
+            prev.input.timestamp > current.input.timestamp ? prev : current  
+            })
+        }
+
+        //set baln to this current ts output amount
+        balance = recentInputTs.outputs.find(output => output.address === this.publicKey).amount
+        
         
     }
 
