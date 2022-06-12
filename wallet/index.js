@@ -4,6 +4,7 @@ import ChainUtil from '../chain-utilities.js';
 import Ts from './ts.js';
 
 
+
 class Wallet {
     constructor (){
         this.balance = INITIAL_BALANCE;
@@ -40,14 +41,14 @@ class Wallet {
 
         return ts;
     }
-
+    
     calcBalance(blockchain){
         let balance = this.balance;
         //each ts object contained in each block ... array with history of all ts
         let tsns = [];  
         //for each on: -> block -> tsns
         blockchain.chain.forEach(block => block.data.forEach(ts =>{ tsns.push(ts) }));
-
+        
         //find all tsns matching this wallet's address 
         const walletInputTsns = tsns.filter(ts => ts.input.address === this.publicKey)
 
