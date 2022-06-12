@@ -47,7 +47,7 @@ app.get('/tsns',(req,res) => {
 //POST::transact consist of recipient and amount
 app.post('/transact',(req,res) => {
     const { recepient, amount } = req.body;
-    const ts = wallet.createTs(recepient, amount, tsPool);  
+    const ts = wallet.createTs(recepient, amount,bc, tsPool);  
 
     p2pServer.broadcastTs(ts); //handle decentralization
     res.redirect('/tsns')

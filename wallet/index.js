@@ -21,7 +21,8 @@ class Wallet {
         return this.keyPair.sign(dataHash);
     }
 
-    createTs(recepient, amount, tsPool){
+    createTs(recepient, amount, blockchain, tsPool){ //new arg of bc for the calcBalance()
+        this.balance = this.calcBalance(blockchain);
         if(amount > this.balance){
             console.log(`This ${amount} amount exceeds current balance of: ${this.balance}`);
             return;

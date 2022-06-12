@@ -1,13 +1,15 @@
 import TsPool from "./ts-pool.js";
 import Wallet from "./index.js";
+import BlockChain from '../blockchain/blockchain.js';
 
 describe("Wallet", ()=> {
 
-    let  wallet, tsPool;
+    let  wallet, tsPool, bc;
 
     beforeEach(()=>{
         tsPool = new TsPool();
         wallet = new Wallet(); 
+        bc = new BlockChain();
     })
 
     describe("is creating a ts", ()=>{
@@ -16,12 +18,12 @@ describe("Wallet", ()=> {
         beforeEach(()=> {
             sendAmount = 50;
             receipient = "r4ndom-addr355";
-            ts = wallet.createTs(receipient, sendAmount, tsPool)
+            ts = wallet.createTs(receipient, sendAmount,bc, tsPool)
         })
 
         describe("and doing the same ts", ()=>{
             beforeEach(()=>{
-                wallet.createTs(receipient, sendAmount, tsPool)
+                wallet.createTs(receipient, sendAmount, bc, tsPool)
             })
 
             //@sender

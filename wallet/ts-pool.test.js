@@ -1,10 +1,11 @@
 import TsPool from "./ts-pool.js";
 import Wallet from "./index.js";
 import Ts from "./ts.js";
+import BlockChain from '../blockchain/blockchain.js'
 
 describe("Transaction Pool", ()=> {
 
-    let ts, wallet, tsPool;
+    let ts, wallet, tsPool,bc;
 
     beforeEach(()=>{
         tsPool = new TsPool();
@@ -12,7 +13,8 @@ describe("Transaction Pool", ()=> {
         // ts = new Ts.newTs(wallet, 'r4nd-4dr355', 30);
         // tsPool.updateOrAddTs(ts);
         //replaced by createTs()
-        ts = wallet.createTs('r4nd-4dr355',30,tsPool);
+        ts = wallet.createTs('r4nd-4dr355',30,bc,tsPool);
+        bc = new BlockChain();
     })
 
     //prove tsPool adds ts in the pool
@@ -42,7 +44,7 @@ describe("Transaction Pool", ()=> {
             //generate loop for valid ts (odd) and corrupt (even)
             for (let i = 0; i < 6; i++) {
                 wallet = new Wallet();
-                ts = wallet.createTs('r4nd-4dr355',30,tsPool); 
+                ts = wallet.createTs('r4nd-4dr355',30,bc,tsPool); 
                 if (i%2 == 0) { //even
                     ts.input.amount = 89832; //corrupts
                 } else {
