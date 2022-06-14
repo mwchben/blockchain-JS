@@ -1,6 +1,7 @@
 import TsPool from "./ts-pool.js";
 import Wallet from "./index.js";
 import BlockChain from '../blockchain/blockchain.js';
+import {INITIAL_BALANCE } from '../config.js';
 
 describe("Wallet", ()=> {
 
@@ -40,4 +41,24 @@ describe("Wallet", ()=> {
 
        
     }) 
+    describe ("calculate balance", ()=>{
+        let addBalance, senderWallet, repeatAdd;
+
+        beforeEach(()=>{
+            addBalance = 100;
+            senderWallet = new Wallet();
+            repeatAdd = 3;
+
+            for (let i=1; i<repeatAdd; i++ ){
+                senderWallet.createTs(wallet.publicKey, addBalance, bc, tsPool)
+            }
+        })
+
+        it('calculates the balance for bc transactions matching the recepient', ()=>{
+            expect(wallet.calcBalance(bc)).toEqual(INITIAL_BALANCE + (addBalance*repeatAdd))
+        })
+        it('calculates the balance for bc transactions matching the sender', ()=>{
+            expect(senderWallet.calcBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance*repeatAdd))
+        })
+    })
 })
