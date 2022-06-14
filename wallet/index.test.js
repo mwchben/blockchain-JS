@@ -45,20 +45,21 @@ describe("Wallet", ()=> {
         let addBalance, senderWallet, repeatAdd;
 
         beforeEach(()=>{
-            addBalance = 100;
             senderWallet = new Wallet();
+            addBalance = 100;            
             repeatAdd = 3;
 
-            for (let i=1; i<repeatAdd; i++ ){
+            for (let i=0; i<repeatAdd; i++ ){
                 senderWallet.createTs(wallet.publicKey, addBalance, bc, tsPool)
             }
+            bc.addBlock(tsPool.tsns)
         })
 
         it('calculates the balance for bc transactions matching the recepient', ()=>{
-            expect(wallet.calcBalance(bc)).toEqual(INITIAL_BALANCE + (addBalance*repeatAdd))
+            expect(wallet.calcBalance(bc)).toEqual(INITIAL_BALANCE + (addBalance * repeatAdd))
         })
         it('calculates the balance for bc transactions matching the sender', ()=>{
-            expect(senderWallet.calcBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance*repeatAdd))
+            expect(senderWallet.calcBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance * repeatAdd))
         })
     })
 })
