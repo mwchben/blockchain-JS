@@ -66,7 +66,7 @@ describe("Wallet", ()=> {
             let subtractBalance, receipientBalance;
             
             beforeEach(()=>{
-                tsPool.clear(); //remove the original pool
+                tsPool.clearTsns(); //remove the original pool
                 subtractBalance = 60;
                 receipientBalance = wallet.calcBalance(bc);
                 wallet.createTs(senderWallet.publicKey, subtractBalance, bc, tsPool);
@@ -76,7 +76,7 @@ describe("Wallet", ()=> {
             describe ("and the  sender sends another transaction to the receipient", ()=>{
 
                 beforeEach(()=>{
-                    tsPool.clear();
+                    tsPool.clearTsns();
                     senderWallet.createTs(wallet.publicKey, addBalance, bc, tsPool);
                     bc.addBlock(tsPool.tsns)
                 })
