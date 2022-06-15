@@ -61,5 +61,30 @@ describe("Wallet", ()=> {
         it('calculates the balance for bc transactions matching the sender', ()=>{
             expect(senderWallet.calcBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance * repeatAdd))
         })
+
+        describe("and the recepient conducts a transaction",()=>{
+            let subtractBalance, receipientBalance;
+            
+            beforeEach(()=>{
+                tsPool.clear(); //remove the original pool
+                subtractBalance = 60;
+                receipientBalance = wallet.calcBalance(bc);
+                wallet.createTs(senderWallet.publicKey, subtractBalance, bc, tsPool);
+                bc.addBlock(tsPool.tsns);
+            })
+
+            describe ("and the  sender sends another transaction to the receipient", ()=>{
+
+                beforeEach(()=>{
+                    tsPool.clear();
+                    senderWallet.createTs(wallet.publicKey, addBalance, bc, tsPool);
+                    bc.addBlock(tsPool.tsns)
+                })
+
+                it("calculates the receipient balance using the most recent transaction", ()=>{
+                    expect(wallet.calcBalance(bc)).toEqual(receipientBalance- subtractBalance + addBalance)
+                })
+            })
+        })
     })
 })
