@@ -1,0 +1,3 @@
+Should have endpoints as URLs for mining the votes.
+Should have a default INITIAL_BALANCE of 2: one to vote and other for reward miner.
+Should assign a voter(reg student) to a public address: either via elliptic or hard-code the publicKeys 
