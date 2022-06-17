@@ -1,3 +1,6 @@
 Should have endpoints as URLs for mining the votes.
 Should have a default INITIAL_BALANCE of 2: one to vote and other for reward miner.
 Should assign a voter(reg student) to a public address: either via elliptic or hard-code the publicKeys 
+*As a voter selects a candidate, the value is stored in block, and in the mine, its where a f(x) with addVotes will
+be included*
+*admin can do the mining (have this request btn on his profile, to mine votes after all voter have been casted)*
