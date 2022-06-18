@@ -1,7 +1,14 @@
-Should have endpoints as URLs for mining the votes.
-Should have a default INITIAL_BALANCE of 2: one to vote and other for reward miner. Total tokens of miner should 
+Should have endpoints as URLs for mining the votes.//
+Should have a default INITIAL_BALANCE of 2: one to vote and other to reward miner.
+ Total tokens of miner should 
 equal no. of votes.
-Should assign a voter(reg student) to a public address: either via elliptic or hard-code the publicKeys 
-*As a voter selects a candidate, the value is stored in block, and in the mine, its where a f(x) with addVotes will
+Should assign a voter(reg student) to a public address: either via elliptic or 
+hard-code the publicKeys 
+*As a voter selects a candidate, the value is stored in block, and in the mine, 
+its where a f(x) with addVotes will
 be included*
-*admin can do the mining (have this request btn on his profile, to mine votes after all voter have been casted)*
+****admin can do the mining (have this request btn on his profile, to mine votes after
+ all voter have been casted)*
+
+ 1. Admin-IEBC (Director, details i.e., approve candidate for Ballot) + 
+ 2. Students (Login, Mani, Vote, Results)
